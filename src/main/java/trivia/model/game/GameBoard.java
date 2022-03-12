@@ -1,9 +1,6 @@
 package trivia.model.game;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 import trivia.model.question.*;
 
 public class GameBoard {
@@ -19,7 +16,9 @@ public class GameBoard {
     private final List<Place> places = new ArrayList<>();
 
     private final List<Player> players = new ArrayList<>();
-    private Player currentPlayerTurn = null;
+    private Player currentPlayerOnTurn = null;
+
+    private Map<Player, Place> placesOfPlayers = new HashMap<>();
 
     public GameBoard(int placesCount, int questionStackCount) {
         validateInput(placesCount, questionStackCount);
@@ -91,6 +90,65 @@ public class GameBoard {
     }
 
     public void addPlayerToGame(Player player) {
+        player.setPlayerNumber(players.size());
+
+        if (players.isEmpty()) {
+            currentPlayerOnTurn = player;
+        }
+
         players.add(player);
+        placesOfPlayers.put(player, places.get(0));
+    }
+
+    public boolean isGamePlayable() {
+        return players.size() >= 2;
+    }
+
+    public void playTurn(int roll) {
+        int newPlaceIndex = calculateNewPlaceForPlayer(
+            placesOfPlayers.get(currentPlayerOnTurn),
+            roll
+        );
+        Place newPlace = places.get(newPlaceIndex);
+        placesOfPlayers.put(currentPlayerOnTurn, newPlace);
+        System.out.println(
+            currentPlayerOnTurn +
+            "'s new location is " +
+            newPlace.getPlaceLocation()
+        );
+
+        System.out.println(
+            "The category is " + newPlace.getQuestionCategoryFromStack()
+        );
+    }
+
+    public void askQuestionForCurrentPlayer() {
+        String question = placesOfPlayers
+            .get(currentPlayerOnTurn)
+            .drawQuestionFromStack()
+            .getQuestionSentence();
+        System.out.println(question);
+    }
+
+    private int calculateNewPlaceForPlayer(Place currentPlace, int roll) {
+        int currentIndex = currentPlace.getPlaceLocation() + roll;
+        if (currentIndex > placesCount) {
+            return currentIndex - placesCount;
+        } else {
+            return currentIndex;
+        }
+    }
+
+    public Player getCurrentPlayerOnTurn() {
+        return currentPlayerOnTurn;
+    }
+
+    public void setCurrentPlayerToNextPlayer() {
+        int indexOfCurrentPlayer = players.indexOf(currentPlayerOnTurn);
+        if (indexOfCurrentPlayer == players.size() - 1) {
+            currentPlayerOnTurn = players.get(0);
+        } else {
+            currentPlayerOnTurn = players.get(indexOfCurrentPlayer + 1);
+        }
     }
 }

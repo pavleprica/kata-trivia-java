@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class GameTest {
 	@Test
 	public void caracterizationTest() {
-		// runs 10.000 "random" games to see the output of old and new code mathces
+		// runs 10.000 "random" games to see the output of old and new code matches
 		for (int seed = 1; seed < 10_000; seed++) {
 			testSeed(seed, false);
 		}
@@ -61,6 +61,6 @@ public class GameTest {
 			System.setOut(old);
 		}
 
-		return new String(baos.toByteArray());
+		return baos.toString();
 	}
 }

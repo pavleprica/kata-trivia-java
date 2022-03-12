@@ -4,6 +4,7 @@ on: push
 
 jobs:
   run-tests:
+    name: "Run tests for GameBetter"
 
     runs-on: ubuntu-20.04
 

@@ -7,10 +7,11 @@ public class Player {
     private final Purse purse;
     private boolean inPenaltyBox = false;
 
-    public Player(String playerName, Purse purse, boolean inPenaltyBox) {
+    private int playerNumber = -1;
+
+    public Player(String playerName, Purse purse) {
         this.playerName = playerName;
         this.purse = purse;
-        this.inPenaltyBox = inPenaltyBox;
     }
 
     public String getPlayerName() {
@@ -27,5 +28,18 @@ public class Player {
 
     public void setInPenaltyBox(boolean inPenaltyBox) {
         this.inPenaltyBox = inPenaltyBox;
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
+    @Override
+    public String toString() {
+        return playerName;
     }
 }

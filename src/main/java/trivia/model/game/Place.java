@@ -14,8 +14,13 @@ public class Place {
         this.questionStack = questionStack;
     }
 
-    private Question drawQuestionFromStack() {
+    public Question drawQuestionFromStack() {
         return questionStack.pop();
+    }
+
+    public String getQuestionCategoryFromStack() {
+        assert questionStack.peek() != null;
+        return questionStack.peek().getQuestionCategory();
     }
 
     public int getPlaceLocation() {

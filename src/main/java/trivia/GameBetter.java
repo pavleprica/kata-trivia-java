@@ -70,21 +70,19 @@ public class GameBetter implements IGame {
     }
 
     private LinkedList<Question> getQuestionStackForPlace(int placeIndex) {
-        switch (placeIndex) {
+        int categoryCount = 4;
+        int placeRange = placeIndex % categoryCount;
+        switch (placeRange) {
             case 0:
-            case 4:
-            case 8:
                 return popQuestions;
             case 1:
-            case 5:
-            case 9:
                 return scienceQuestions;
             case 2:
-            case 6:
-            case 10:
                 return sportQuestions;
-            default:
+            case 3:
                 return rockQuestions;
+            default:
+                throw new IllegalStateException("Shouldn't happen :)");
         }
     }
 

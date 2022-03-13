@@ -1,26 +1,25 @@
 package trivia.model.game;
 
-import java.util.Deque;
+import java.util.LinkedList;
 import trivia.model.question.Question;
 
 public class Place {
 
     private final int placeLocation;
 
-    private Deque<Question> questionStack;
+    private LinkedList<Question> questionStack;
 
-    public Place(int placeLocation, Deque<Question> questionStack) {
+    public Place(int placeLocation, LinkedList<Question> questionStack) {
         this.placeLocation = placeLocation;
         this.questionStack = questionStack;
     }
 
     public Question drawQuestionFromStack() {
-        return questionStack.pop();
+        return questionStack.removeFirst();
     }
 
     public String getQuestionCategoryFromStack() {
-        assert questionStack.peek() != null;
-        return questionStack.peek().getQuestionCategory();
+        return questionStack.getFirst().getQuestionCategory();
     }
 
     public int getPlaceLocation() {

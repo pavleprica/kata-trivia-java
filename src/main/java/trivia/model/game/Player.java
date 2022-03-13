@@ -15,10 +15,6 @@ public class Player {
         this.purse = purse;
     }
 
-    public String getPlayerName() {
-        return playerName;
-    }
-
     public Purse getPurse() {
         return purse;
     }

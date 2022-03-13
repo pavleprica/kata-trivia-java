@@ -46,18 +46,14 @@ public class GameBetter implements IGame {
 
     private void validateInput(int placesCount, int questionStackCount) {
         if (placesCount < 0) {
-            throw new IllegalArgumentException(
-                "Places must be a positive number"
-            );
+            throw new IllegalArgumentException("Places must be a positive number");
         }
         if (placesCount % 2 != 0) {
             throw new IllegalArgumentException("Places must be an even number");
         }
 
         if (questionStackCount < 50 || questionStackCount > 350) {
-            throw new IllegalArgumentException(
-                "Question stack count should be between 50 and 350"
-            );
+            throw new IllegalArgumentException("Question stack count should be between 50 and 350");
         }
     }
 
@@ -71,17 +67,8 @@ public class GameBetter implements IGame {
     }
 
     private void initPlaces() {
-        for (
-            int placeLocation = 0;
-            placeLocation < placesCount;
-            placeLocation++
-        ) {
-            places.add(
-                new Place(
-                    placeLocation,
-                    getQuestionStackForPlace(placeLocation)
-                )
-            );
+        for (int placeLocation = 0; placeLocation < placesCount; placeLocation++) {
+            places.add(new Place(placeLocation, getQuestionStackForPlace(placeLocation)));
         }
     }
 
@@ -116,9 +103,7 @@ public class GameBetter implements IGame {
         placesOfPlayers.put(player, places.get(0));
 
         System.out.println(playerName + " was added");
-        System.out.println(
-            "They are player number " + (player.getPlayerNumber() + 1)
-        );
+        System.out.println("They are player number " + (player.getPlayerNumber() + 1));
         return true;
     }
 
@@ -130,14 +115,10 @@ public class GameBetter implements IGame {
         if (currentPlayer.isInPenaltyBox()) {
             if (isPrisonFreeingRoll(roll)) {
                 isGettingOutOfPenaltyBox = true;
-                System.out.println(
-                    currentPlayer + " is getting out of the penalty box"
-                );
+                System.out.println(currentPlayer + " is getting out of the penalty box");
                 playTurnAndAskQuestion(roll);
             } else {
-                System.out.println(
-                    currentPlayer + " is not getting out of the penalty box"
-                );
+                System.out.println(currentPlayer + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
         } else {
@@ -155,21 +136,12 @@ public class GameBetter implements IGame {
     }
 
     public void playTurn(int roll) {
-        int newPlaceIndex = calculateNewPlaceForPlayer(
-            placesOfPlayers.get(currentPlayerOnTurn),
-            roll
-        );
+        int newPlaceIndex = calculateNewPlaceForPlayer(placesOfPlayers.get(currentPlayerOnTurn), roll);
         Place newPlace = places.get(newPlaceIndex);
         placesOfPlayers.put(currentPlayerOnTurn, newPlace);
-        System.out.println(
-            currentPlayerOnTurn +
-            "'s new location is " +
-            newPlace.getPlaceLocation()
-        );
+        System.out.println(currentPlayerOnTurn + "'s new location is " + newPlace.getPlaceLocation());
 
-        System.out.println(
-            "The category is " + newPlace.getQuestionCategoryFromStack()
-        );
+        System.out.println("The category is " + newPlace.getQuestionCategoryFromStack());
     }
 
     private int calculateNewPlaceForPlayer(Place currentPlace, int roll) {
@@ -182,10 +154,7 @@ public class GameBetter implements IGame {
     }
 
     public void askQuestionForCurrentPlayer() {
-        String question = placesOfPlayers
-            .get(currentPlayerOnTurn)
-            .drawQuestionFromStack()
-            .getQuestionSentence();
+        String question = placesOfPlayers.get(currentPlayerOnTurn).drawQuestionFromStack().getQuestionSentence();
         System.out.println(question);
     }
 
@@ -213,9 +182,7 @@ public class GameBetter implements IGame {
 
     private boolean addCoinAndCheckIfPurseHasSpace(Player player) {
         player.getPurse().addCoin();
-        System.out.println(
-            player + " now has " + player.getPurse().getCoins() + " Gold Coins."
-        );
+        System.out.println(player + " now has " + player.getPurse().getCoins() + " Gold Coins.");
 
         return player.getPurse().doesPurseHaveSpace();
     }

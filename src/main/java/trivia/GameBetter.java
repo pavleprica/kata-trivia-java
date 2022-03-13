@@ -159,18 +159,18 @@ public class GameBetter implements IGame {
         if (currentPlayer.isInPenaltyBox()) {
             if (currentPlayer.isGettingOutOfPenlatyBox()) {
                 System.out.println("Answer was correct!!!!");
-                return addCoinAndUpdatePlayer(currentPlayer);
+                return addCoinAndUpdatePlayerAndCheckIfNotWinner(currentPlayer);
             } else {
                 setCurrentPlayerToNextPlayer();
                 return true;
             }
         } else {
             System.out.println("Answer was corrent!!!!");
-            return addCoinAndUpdatePlayer(currentPlayer);
+            return addCoinAndUpdatePlayerAndCheckIfNotWinner(currentPlayer);
         }
     }
 
-    private boolean addCoinAndUpdatePlayer(Player player) {
+    private boolean addCoinAndUpdatePlayerAndCheckIfNotWinner(Player player) {
         boolean isNotAWinner = addCoinAndCheckIfPurseHasSpace(player);
         setCurrentPlayerToNextPlayer();
         return isNotAWinner;
@@ -178,6 +178,7 @@ public class GameBetter implements IGame {
 
     private boolean addCoinAndCheckIfPurseHasSpace(Player player) {
         player.getPurse().addCoin();
+
         System.out.println(player + " now has " + player.getPurse().getCoins() + " Gold Coins.");
 
         return player.getPurse().doesPurseHaveSpace();

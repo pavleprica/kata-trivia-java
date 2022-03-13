@@ -6,7 +6,7 @@ public class Player {
 
     private final Purse purse;
     private boolean inPenaltyBox = false;
-    private boolean isGettingOutOfPenlatyBox = false;
+    private boolean isGettingOutOfPenaltyBox = false;
 
     private int playerNumber = -1;
 
@@ -39,12 +39,12 @@ public class Player {
         this.playerNumber = playerNumber;
     }
 
-    public boolean isGettingOutOfPenlatyBox() {
-        return isGettingOutOfPenlatyBox;
+    public boolean isGettingOutOfPenaltyBox() {
+        return isGettingOutOfPenaltyBox;
     }
 
-    public void setGettingOutOfPenlatyBox(boolean gettingOutOfPenlatyBox) {
-        isGettingOutOfPenlatyBox = gettingOutOfPenlatyBox;
+    public void setGettingOutOfPenaltyBox(boolean gettingOutOfPenaltyBox) {
+        isGettingOutOfPenaltyBox = gettingOutOfPenaltyBox;
     }
 
     @Override

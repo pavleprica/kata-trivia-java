@@ -111,11 +111,11 @@ public class GameBetter implements IGame {
 
         if (currentPlayer.isInPenaltyBox()) {
             if (isPrisonFreeingRoll(roll)) {
-                currentPlayer.setGettingOutOfPenlatyBox(true);
+                currentPlayer.setGettingOutOfPenaltyBox(true);
                 System.out.println(currentPlayer + " is getting out of the penalty box");
             } else {
                 System.out.println(currentPlayer + " is not getting out of the penalty box");
-                currentPlayer.setGettingOutOfPenlatyBox(false);
+                currentPlayer.setGettingOutOfPenaltyBox(false);
                 return;
             }
         }
@@ -157,7 +157,7 @@ public class GameBetter implements IGame {
     public boolean wasCorrectlyAnswered() {
         Player currentPlayer = currentPlayerOnTurn;
         if (currentPlayer.isInPenaltyBox()) {
-            if (currentPlayer.isGettingOutOfPenlatyBox()) {
+            if (currentPlayer.isGettingOutOfPenaltyBox()) {
                 System.out.println("Answer was correct!!!!");
                 return addCoinAndUpdatePlayerAndCheckIfNotWinner(currentPlayer);
             } else {

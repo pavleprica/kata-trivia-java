@@ -24,9 +24,6 @@ public class GameBetter implements IGame {
 
     private Map<Player, Place> placesOfPlayers = new HashMap<>();
 
-    // TODO
-    boolean isGettingOutOfPenaltyBox;
-
     public GameBetter() {
         this.placesCount = 12;
         this.questionStackCount = 50;
@@ -73,7 +70,7 @@ public class GameBetter implements IGame {
     }
 
     private LinkedList<Question> getQuestionStackForPlace(int placeIndex) {
-        switch (placeIndex) { // TODO Investigate how to improve
+        switch (placeIndex) {
             case 0:
             case 4:
             case 8:
@@ -114,16 +111,15 @@ public class GameBetter implements IGame {
 
         if (currentPlayer.isInPenaltyBox()) {
             if (isPrisonFreeingRoll(roll)) {
-                isGettingOutOfPenaltyBox = true;
+                currentPlayer.setGettingOutOfPenlatyBox(true);
                 System.out.println(currentPlayer + " is getting out of the penalty box");
-                playTurnAndAskQuestion(roll);
             } else {
                 System.out.println(currentPlayer + " is not getting out of the penalty box");
-                isGettingOutOfPenaltyBox = false;
+                currentPlayer.setGettingOutOfPenlatyBox(false);
+                return;
             }
-        } else {
-            playTurnAndAskQuestion(roll);
         }
+        playTurnAndAskQuestion(roll);
     }
 
     private boolean isPrisonFreeingRoll(int roll) {
@@ -161,7 +157,7 @@ public class GameBetter implements IGame {
     public boolean wasCorrectlyAnswered() {
         Player currentPlayer = currentPlayerOnTurn;
         if (currentPlayer.isInPenaltyBox()) {
-            if (isGettingOutOfPenaltyBox) {
+            if (currentPlayer.isGettingOutOfPenlatyBox()) {
                 System.out.println("Answer was correct!!!!");
                 return addCoinAndUpdatePlayer(currentPlayer);
             } else {

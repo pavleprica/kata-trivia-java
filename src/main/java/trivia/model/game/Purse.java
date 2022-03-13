@@ -22,8 +22,8 @@ public class Purse {
         }
     }
 
-    public boolean isPurseFull() {
-        return coins == maxPurseSize;
+    public boolean doesPurseHaveSpace() {
+        return coins < maxPurseSize;
     }
 
     public int getCoins() {
